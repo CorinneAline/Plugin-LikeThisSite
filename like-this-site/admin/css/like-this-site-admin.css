@@ -3,6 +3,18 @@
  * included in this file.
  */
  
- td{
+ .td_color{
    border:1px solid #ccc;
+   width:25px;
+ }
+ 
+ .left{
+   float: left;
+ }
+ 
+ #like_this_site_resultat{
+   width: 15%;
+   text-align:center;
+   border: 1px solid #ccc;
+   padding : 1em;
  }

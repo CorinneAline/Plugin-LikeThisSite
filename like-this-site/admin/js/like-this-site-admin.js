@@ -30,28 +30,51 @@
 	 */
    
 $('td input:radio').prop('checked', false);   
+$('#like_this_site_label').val("");
 
-$('td #icone input:radio').click(function () {
-  alert(this.value);
-  $('#resultat').html('<i class="fa fa-2x fa-'+(this.value)+'"></i>');
+$('td #like_this_site_icone input:radio').click(function () {
+  $('#like_this_site_resultat').html('<i class="fa fa-2x fa-'+(this.value)+'"></i>');
 });
 
-$('td #color input:radio').click(function () {
+$('td #like_this_site_color input:radio').click(function () {
   var couleur = "#"+(this.value);
-  $('#resultat i').css("color", couleur);
+  $('#like_this_site_resultat i').css("color", couleur);
 });
 
-$('.colorOk').click(function (e) {
+$('.like_this_site_colorOk').click(function (e) {
   e.preventDefault();
   var inputColor = $('#valueInput').val();
   var couleur = "#"+(inputColor);
-  $('#resultat i').css("color", couleur);
+  $('#like_this_site_resultat i').css("color", couleur);
 });
 
-$('#like_this_site_label').change(function() {
-   var valeur = (this.value);
-   alert(valeur);
-   $('#resultat').append('<strong>'+(this.value)+'</div>');
+$('#like_this_site_label_ok_btn').click(function(e) {
+   e.preventDefault();
+   var label = $('#like_this_site_label').val();
+   var $newdiv1 = $( "<div id='newLabel'>"+label+"</div>" );
+ 
+  $( "#like_this_site_resultat" ).prepend( $newdiv1 );
+  $('input[name=like_this_site_position][value="top"]').prop('checked',true);
 });
-   
+
+$('td #like_this_site_position input:radio').click(function () {
+  var position = (this.value);
+  var label = $('#like_this_site_label').val();
+  $('#newLabel').remove();  
+  
+  if (this.value == "top"){
+   var $newdiv2 = $( "<div id='object2'>"+label+"</div>" );
+   $( "#like_this_site_resultat" ).prepend( $newdiv2 );   
+   }
+
+  if (this.value == "bottom"){
+   var $newdiv2 = $( "<div id='object2'>"+label+"</div>" );
+   $( "#like_this_site_resultat" ).append( $newdiv2 );   
+   }   
+}); 
+
+$('#reset').click(function (e) {
+  e.preventDefault(); 
+  window.location.href = window.location.href;
+});   
 })( jQuery );

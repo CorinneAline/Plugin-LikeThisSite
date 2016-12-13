@@ -198,15 +198,6 @@ class Like_This_Site_Admin {
   	);
     
     add_settings_field(
-  		$this->option_name . '_display',
-  		__( 'Affichage du résultat', 'like-this-site' ),
-  		array( $this, $this->option_name . '_display_cb' ),
-  		$this->plugin_name,
-  		$this->option_name . '_general',
-  		array( 'label_for' => $this->option_name . '_display' )
-  	);
-    
-    add_settings_field(
   		$this->option_name . '_plugin_position',
   		__( 'Emplacement du plugin', 'like-this-site' ),
   		array( $this, $this->option_name . '_plugin_position_cb' ),
@@ -219,7 +210,6 @@ class Like_This_Site_Admin {
     register_setting( $this->plugin_name, $this->option_name . '_color', array( $this, $this->option_name . '_sanitize_position' ) );
     register_setting( $this->plugin_name, $this->option_name . '_label', 'string' );
     register_setting( $this->plugin_name, $this->option_name . '_position', array( $this, $this->option_name . '_sanitize_position' ) );
-    register_setting( $this->plugin_name, $this->option_name . '_display', array( $this, $this->option_name . '_sanitize_position' ) );
     register_setting( $this->plugin_name, $this->option_name . '_plugin-position', array( $this, $this->option_name . '_sanitize_position' ) );
 	 
 	}
@@ -231,7 +221,7 @@ class Like_This_Site_Admin {
 	 * @since  1.0.0
 	 */
 	public function like_this_site_general_cb() {
-		echo '<p>' . __( 'Choisir les options.', 'like-this-site' ) . '</p>';
+		echo '<p>'.__( 'Choisir les options.', 'like-this-site' ) . '</p>';
 	}
   
    /**
@@ -240,7 +230,8 @@ class Like_This_Site_Admin {
 	 * @since  1.0.0
 	 */
 	public function like_this_site_resultat_cb() {
-		echo '<p id="resultat">' . __( 'Résultat de la sélection.', 'like-this-site' ) . '</p>';
+		echo '<div id="like_this_site_zone_resultat">'.__( 'Visualisation du résultat.', 'like-this-site' ) . '<div id="like_this_site_resultat"></div></div>';
+    echo '<br><button id="reset">'.__('Réinitialiser', 'like-this-site') .'</button>';
 	}
   
   /**
@@ -250,7 +241,7 @@ class Like_This_Site_Admin {
 	 */
 	public function like_this_site_icon_cb() {
 		?>
-    <div id="icone">
+    <div id="like_this_site_icone">
       <fieldset>
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_icon' ?>" id="<?php echo $this->option_name . '_icon' ?>" value="thumbs-up">
@@ -293,45 +284,44 @@ class Like_This_Site_Admin {
 	 */
 	public function like_this_site_color_cb() {
 		?>
-  <div id="color">
+  <div id="like_this_site_color">
     <fieldset>
         <table>
   				<tr>
   					<td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="FFFFFF"></td>
-  					<td bgcolor="#FFFFFF"></td>
+  					<td class="td_color" bgcolor="#FFFFFF"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="FF0000"></td>
-  					<td bgcolor="#FF0000"></td>
+  					<td class="td_color" bgcolor="#FF0000"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="8FFC00"></td>
-  					<td bgcolor="#8FFC00"></td>
+  					<td class="td_color" bgcolor="#8FFC00"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="003CFF"></td>
-  					<td bgcolor="#003CFF"></td>
+  					<td class="td_color" bgcolor="#003CFF"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="FC3F00"></td>
-  					<td bgcolor="#FC3F00"></td>
+  					<td class="td_color" bgcolor="#FC3F00"></td>
   				</tr>
   				<tr>
   					<td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="00BDFC"></td>
-  					<td bgcolor="#00BDFC"></td>
+  					<td class="td_color" bgcolor="#00BDFC"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="FCEB00"></td>
-  					<td bgcolor="#FCEB00"></td>
+  					<td class="td_color" bgcolor="#FCEB00"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="FC00E7"></td>
-  					<td bgcolor="#FC00E7"></td>
+  					<td class="td_color" bgcolor="#FC00E7"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="1AA125"></td>
-  					<td bgcolor="1AA125"></td>
+  					<td class="td_color" bgcolor="1AA125"></td>
             <td></td>
             <td><input type="radio" name="<?php echo $this->option_name . '_color' ?>" id="<?php echo $this->option_name . '_color' ?>" value="A11A96"></td>
-  					<td bgcolor="#A11A96"></td>
-            <td>Couleur personnalisée</td>
+  					<td class="td_color" bgcolor="#A11A96"></td>
   					<td><button class="jscolor
                   {valueElement:'valueInput', styleElement:'styleInput'}">
                    Choisir une couleur personnalisée
-                </button><input id="valueInput" value="ff6699"><button class="colorOk">Ok</button></td>
+                </button><input type="hidden" id="valueInput" value="ff6699"><button class="like_this_site_colorOk">Ok</button></td>
   				</tr>
   			</table>
       </fieldset>
@@ -346,7 +336,7 @@ class Like_This_Site_Admin {
 	 * @since  1.0.0
 	 */
 	public function like_this_site_label_cb() {
-		echo '<input type="text" name="' . $this->option_name . '_label' . '" id="' . $this->option_name . '_label' . '"> ';
+		echo '<input placeholder="'. __('Votez pour ce site!', 'like-this-site') .'" type="text" name="' . $this->option_name . '_label' . '" id="' . $this->option_name . '_label' . '"><button id="like_this_site_label_ok_btn">Valider</button> ';
 	}
   
   
@@ -357,12 +347,8 @@ class Like_This_Site_Admin {
 	 */
 	public function like_this_site_position_cb() {
 		?>
-			<fieldset>
-				<label>
-					<input type="radio" name="<?php echo $this->option_name . '_position' ?>" id="<?php echo $this->option_name . '_position' ?>" value="before">
-					<?php _e( 'Avant l\'icône', 'like-this-site' ); ?>
-				</label>
-				<br>
+		<div id="like_this_site_position">	
+      <fieldset>
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_position' ?>" value="top">
 					<?php _e( 'Au dessus de l\'icône', 'like-this-site' ); ?>
@@ -373,28 +359,7 @@ class Like_This_Site_Admin {
 					<?php _e( 'Au dessous de l\'icône', 'like-this-site' ); ?>
 				</label>
 			</fieldset>
-		<?php
-	}
-  
-  
-   /**
-	 * Render the radio input field for display option
-	 *
-	 * @since  1.0.0
-	 */
-	public function like_this_site_display_cb() {
-		?>
-      <fieldset>
-				<label>
-					<input type="radio" name="<?php echo $this->option_name . '_result' ?>" id="<?php echo $this->option_name . '_display' ?>" value="pourcentage">
-					Pourcentage (Ex : 50 %)
-				</label>
-				<br>
-				<label>
-          <input type="radio" name="<?php echo $this->option_name . '_result' ?>" id="<?php echo $this->option_name . '_display' ?>" value="sur-dix">
-          Nombre (Ex : 50)
-				</label>
-			</fieldset>
+    </div>
 		<?php
 	}
   
@@ -406,6 +371,7 @@ class Like_This_Site_Admin {
 	 */
 	public function like_this_site_plugin_position_cb() {
 		?>
+    <div id="like_this_site_plugin-position">
 			<fieldset>
 				<label>
 					<input type="radio" name="<?php echo $this->option_name . '_plugin_position' ?>" id="<?php echo $this->option_name . '_plugin_position' ?>" value="footer">
@@ -422,6 +388,7 @@ class Like_This_Site_Admin {
 					<?php _e( 'Sur la page d\'accueil', 'like-this-site' ); ?>
 				</label>
 			</fieldset>
+    </div>
 		<?php
 	}
   

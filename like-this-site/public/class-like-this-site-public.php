@@ -74,7 +74,7 @@ class Like_This_Site_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/like-this-site-public.css', array(), $this->version, 'all' );
-
+    wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'css/font-awesome.min.css', array(), '4.7.0', 'all' );
 	}
 
 	/**
