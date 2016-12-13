@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LikeThisSite version 1.0.0\n"
-"POT-Creation-Date: 2016-12-13 12:20+0100\n"
-"PO-Revision-Date: 2016-12-13 12:21+0100\n"
+"POT-Creation-Date: 2016-12-13 19:51+0100\n"
+"PO-Revision-Date: 2016-12-13 19:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: resoclick@free.fr\n"
 "Language: fr_FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: admin\n"
 "X-Poedit-SearchPath-2: includes\n"
@@ -49,21 +49,54 @@ msgid "Position du label"
 msgstr "Position du label"
 
 #: admin/class-like-this-site-admin.php:202
+#: admin/class-like-this-site-admin.php:393
+msgid "Classe css (facultatif)"
+msgstr "Classe css (facultatif)"
+
+#: admin/class-like-this-site-admin.php:211
+msgid "Libellé du résultat"
+msgstr "Libellé du résultat"
+
+#: admin/class-like-this-site-admin.php:220
 msgid "Emplacement du plugin"
 msgstr "Emplacement du plugin"
 
-#: admin/class-like-this-site-admin.php:224
+#: admin/class-like-this-site-admin.php:245
 msgid "Choisir les options."
 msgstr "Choisir les options."
 
-#: admin/class-like-this-site-admin.php:233
+#: admin/class-like-this-site-admin.php:254
 msgid "Visualisation du résultat."
 msgstr "Visualisation du résultat."
 
-#: admin/class-like-this-site-admin.php:234
+#: admin/class-like-this-site-admin.php:255
 msgid "Réinitialiser"
 msgstr "Réinitialiser"
 
-#: admin/class-like-this-site-admin.php:339
+#: admin/class-like-this-site-admin.php:360
 msgid "Votez pour ce site!"
 msgstr "Votez pour ce site!"
+
+#: admin/class-like-this-site-admin.php:375
+msgid "Au dessus de l'icône"
+msgstr "Au dessus de l'icône"
+
+#: admin/class-like-this-site-admin.php:380
+msgid "Au dessous de l'icône"
+msgstr "Au dessous de l'icône"
+
+#: admin/class-like-this-site-admin.php:402
+msgid "Nombre de votes"
+msgstr "Nombre de votes"
+
+#: admin/class-like-this-site-admin.php:417
+msgid "Dans le pied de page"
+msgstr "Dans le pied de page"
+
+#: admin/class-like-this-site-admin.php:422
+msgid "Dans les barres latérales"
+msgstr "Dans les barres latérales"
+
+#: admin/class-like-this-site-admin.php:427
+msgid "Sur la page d'accueil"
+msgstr "Sur la page d'accueil"

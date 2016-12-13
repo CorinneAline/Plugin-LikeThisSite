@@ -189,15 +189,33 @@ class Like_This_Site_Admin {
   	); 
     
     add_settings_field(
-  		$this->option_name . '_position',
+  		$this->option_name . '_label_position',
   		__( 'Position du label', 'like-this-site' ),
-  		array( $this, $this->option_name . '_position_cb' ),
+  		array( $this, $this->option_name . '_label_position_cb' ),
   		$this->plugin_name,
   		$this->option_name . '_general',
   		array( 'label_for' => $this->option_name . '_position' )
   	);
     
     add_settings_field(
+  		$this->option_name . '_class',
+  		__( 'Classe css (facultatif)', 'like-this-site' ),
+  		array( $this, $this->option_name . '_class_cb' ),
+  		$this->plugin_name,
+  		$this->option_name . '_general',
+  		array( 'label_for' => $this->option_name . '_class' )
+  	);
+    
+    add_settings_field(
+  		$this->option_name . '_label_result',
+  		__( 'Libellé du résultat', 'like-this-site' ),
+  		array( $this, $this->option_name . '_label_result_cb' ),
+  		$this->plugin_name,
+  		$this->option_name . '_general',
+  		array( 'label_for' => $this->option_name . '_label_result' )
+  	);
+    
+     add_settings_field(
   		$this->option_name . '_plugin_position',
   		__( 'Emplacement du plugin', 'like-this-site' ),
   		array( $this, $this->option_name . '_plugin_position_cb' ),
@@ -206,11 +224,14 @@ class Like_This_Site_Admin {
   		array( 'label_for' => $this->option_name . '_plugin_position' )
   	);
     
-    register_setting( $this->plugin_name, $this->option_name . '_icon', array( $this, $this->option_name . '_sanitize_position' ) );
-    register_setting( $this->plugin_name, $this->option_name . '_color', array( $this, $this->option_name . '_sanitize_position' ) );
-    register_setting( $this->plugin_name, $this->option_name . '_label', 'string' );
-    register_setting( $this->plugin_name, $this->option_name . '_position', array( $this, $this->option_name . '_sanitize_position' ) );
-    register_setting( $this->plugin_name, $this->option_name . '_plugin-position', array( $this, $this->option_name . '_sanitize_position' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_icon', array( $this, $this->option_name . '_sanitize_icon' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_color', array( $this, $this->option_name . '_sanitize_color' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_label', array( $this, $this->option_name . '_sanitize_label' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_label_position', array( $this, $this->option_name . '_sanitize_label_position' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_class', array( $this, $this->option_name . '_sanitize_class' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_label_result', array( $this, $this->option_name . '_sanitize_label_result' ) );
+    register_setting( $this->plugin_name, $this->option_name . '_plugin_position', array( $this, $this->option_name . '_sanitize_plugin_position' ) );
+    
 	 
 	}
   
@@ -345,22 +366,40 @@ class Like_This_Site_Admin {
 	 *
 	 * @since  1.0.0
 	 */
-	public function like_this_site_position_cb() {
+	public function like_this_site_label_position_cb() {
 		?>
-		<div id="like_this_site_position">	
+		<div id="like_this_site_label_position">	
       <fieldset>
 				<label>
-					<input type="radio" name="<?php echo $this->option_name . '_position' ?>" value="top">
+					<input type="radio" name="<?php echo $this->option_name . '_label_position' ?>" value="top">
 					<?php _e( 'Au dessus de l\'icône', 'like-this-site' ); ?>
 				</label>
         <br>
         <label>
-					<input type="radio" name="<?php echo $this->option_name . '_position' ?>" value="bottom">
+					<input type="radio" name="<?php echo $this->option_name . '_label_position' ?>" value="bottom">
 					<?php _e( 'Au dessous de l\'icône', 'like-this-site' ); ?>
 				</label>
 			</fieldset>
     </div>
 		<?php
+	}
+  
+   /**
+	 * Render the class to apply to the plugin
+	 *
+	 * @since  1.0.0
+	 */
+	public function like_this_site_class_cb() {
+		echo '<input placeholder="'. __('Classe css (facultatif)', 'like-this-site') .'" type="text" name="' . $this->option_name . '_class' . '" > ';
+	}
+  
+  /**
+	 * Render the label_result to display
+	 *
+	 * @since  1.0.0
+	 */
+	public function like_this_site_label_result_cb() {
+		echo '<input placeholder="'. __('Nombre de votes', 'like-this-site') .'" type="text" name="' . $this->option_name . '_label_result' . '" > ';
 	}
   
   
@@ -374,7 +413,7 @@ class Like_This_Site_Admin {
     <div id="like_this_site_plugin-position">
 			<fieldset>
 				<label>
-					<input type="radio" name="<?php echo $this->option_name . '_plugin_position' ?>" id="<?php echo $this->option_name . '_plugin_position' ?>" value="footer">
+					<input type="radio" name="<?php echo $this->option_name . '_plugin_position' ?>" value="footer">
 					<?php _e( 'Dans le pied de page', 'like-this-site' ); ?>
 				</label>
 				<br>
@@ -394,16 +433,113 @@ class Like_This_Site_Admin {
   
   
   /**
-	 * Sanitize the text position value before being saved to database
+	 * Sanitize the icon value before being saved to database
 	 *
-	 * @param  string $position $_POST value
+	 * @param  string $icon $_POST value
 	 * @since  1.0.0
 	 * @return string           Sanitized value
 	 */
-	public function like_this_site_sanitize_position( $position ) {
-		if ( in_array( $position, array( 'before', 'after' ), true ) ) {
-	        return $position;
+	public function like_this_site_sanitize_icon( $icon ) {
+		
+    if ( !in_array( $icon, array( 'thumbs-up', 'thumbs-o-up','heart','heart-o','plus','plus-circle' ), true ) ) {
+	        return;
 	    }
+    
+    if (isset($icon) && !empty($icon)){
+          return $icon;
+    }
+	}
+  
+  /**
+	 * Sanitize the color value before being saved to database
+	 *
+	 * @param  string $color $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_color( $color ) {
+	  if (!preg_match('/[0-9a-fA-F]+/', $color, $matches)) {
+      return;
+    }	
+    if (isset($color) && !empty($color)){
+          return $color;
+    }
+	}
+  
+  /**
+	 * Sanitize the label value before being saved to database
+	 *
+	 * @param  string $label $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_label( $label ) {
+		
+    if (isset($label) && !empty($label)){
+          return sanitize_text_field($label);
+    }
+	}
+  
+  /**
+	 * Sanitize the label_position value before being saved to database
+	 *
+	 * @param  string $label_position $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_label_position( $label_position ) {
+		if ( !in_array( $label_position, array( 'top', 'bottom' ), true ) ) {
+	        return;
+	    }
+      
+    if (isset($label_position) && !empty($label_position)){
+          return $label_position;
+    }
+	}
+  
+  /**
+	 * Sanitize the class value before being saved to database
+	 *
+	 * @param  string $class $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_class( $class ) {
+		
+    if (isset($class) && !empty($class)){
+          return sanitize_text_field($class);
+    }
+	}
+  
+  /**
+	 * Sanitize the label_result value before being saved to database
+	 *
+	 * @param  string $label_result $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_label_result( $label_result ) {
+		
+    if (isset($label_result) && !empty($label_result)){
+          return sanitize_text_field($label_result);
+    }
+	}
+  
+  /**
+	 * Sanitize the plugin_position value before being saved to database
+	 *
+	 * @param  string $plugin_position $_POST value
+	 * @since  1.0.0
+	 * @return string           Sanitized value
+	 */
+	public function like_this_site_sanitize_plugin_position( $plugin_position ) {
+		if ( !in_array( $plugin_position, array( 'footer', 'sidebar','homepage' ), true ) ) {
+	        return ;
+	    }
+      
+    if (isset($plugin_position) && !empty($plugin_position)){
+          return $plugin_position;
+    }
 	}
   
 }

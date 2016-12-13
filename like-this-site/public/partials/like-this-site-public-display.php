@@ -14,37 +14,24 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<?php $options = get_option( 'like_this_site' ); ?> 
+<div id="vote" class="<?php echo $options['like_this_site_class']; ?>">            
+    <?php if ($options['like_this_site_label_position'] == "top") {
+      echo $options['like_this_site_label']; } ?>  
+        <a href="#"><i style="color:<?php echo $options['like_this_site_color']; ?>;" class="fa fa-<?php echo $options['like_this_site_icon']; ?> fa-2x"></i></a>
+    <?php if ($options['like_this_site_label_position'] == "bottom") {
+      echo $options['like_this_site_label']; } ?>
+      <div class="result-label-<?php echo $options['like_this_site_class']; ?>"><?php echo $options['like_this_site_label_result']; ?></div>
+      <div class="result-count-<?php echo $options['like_this_site_class']; ?>">resultat</div> 
+</div>     
 
-<div id="vote">            
-  <a href="#"><i class="fa fa-thumbs-up fa-5x main-color"></i></a>
-</div>            
-           <?php 
-           $file_dir = get_theme_root().'/resoclick-verso/';
-           $file = $file_dir.'/likes.txt';
-           $handle = @fopen($file, "r");
-            if ($handle) {
-                while (($buffer = fgets($handle, 4096)) !== false) {
-                    $count = $buffer;
-                }
-                if (!feof($handle)) {
-                    echo "Erreur: fgets() a échoué\n";
-                }
-                fclose($handle);
-            }
-           
-           ?> 
-    <div class="row-fluid voffset3">
-    <h5>Total des votes</h5>
-    <i class="fa fa-thumbs-up fa-2x"></i>
-    <span id="total" class="label"><?php echo $count ; ?></span>
-    </div>
-    <div id="count" class="hide"></div>
+<div id="count" class="hide"></div>
     
 <div id="thankyouModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-body">
-          <p class="center main-color"><h2>Merci pour votre soutien !</h2></p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
-        </div>
-      </div>
+  <div class="modal-body">
+    <p class="center main-color"><h2>Merci pour votre soutien !</h2></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+  </div>
+</div>

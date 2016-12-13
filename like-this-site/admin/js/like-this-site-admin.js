@@ -51,25 +51,27 @@ $('.like_this_site_colorOk').click(function (e) {
 $('#like_this_site_label_ok_btn').click(function(e) {
    e.preventDefault();
    var label = $('#like_this_site_label').val();
-   var $newdiv1 = $( "<div id='newLabel'>"+label+"</div>" );
+   var $divAutoTop = $( "<div id='divAutoTop'>"+label+"</div>" );
  
-  $( "#like_this_site_resultat" ).prepend( $newdiv1 );
-  $('input[name=like_this_site_position][value="top"]').prop('checked',true);
+  $( "#like_this_site_resultat" ).prepend( $divAutoTop );
+  $('input[name=like_this_site_label_position][value="top"]').prop('checked',true);
 });
 
-$('td #like_this_site_position input:radio').click(function () {
+$('td #like_this_site_label_position input:radio').click(function () {
   var position = (this.value);
   var label = $('#like_this_site_label').val();
-  $('#newLabel').remove();  
+  $('#divAutoTop').remove();  
   
   if (this.value == "top"){
-   var $newdiv2 = $( "<div id='object2'>"+label+"</div>" );
-   $( "#like_this_site_resultat" ).prepend( $newdiv2 );   
+   $('#divBottom').remove(); 
+   var $divTop = $( "<div id='divTop'>"+label+"</div>" );
+   $( "#like_this_site_resultat" ).prepend( $divTop );   
    }
 
   if (this.value == "bottom"){
-   var $newdiv2 = $( "<div id='object2'>"+label+"</div>" );
-   $( "#like_this_site_resultat" ).append( $newdiv2 );   
+   $('#divTop').remove();
+   var $divBottom = $( "<div id='divBottom'>"+label+"</div>" );
+   $( "#like_this_site_resultat" ).append( $divBottom );   
    }   
 }); 
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LikeThisSite version 1.0.0\n"
-"POT-Creation-Date: 2016-12-13 12:30+0100\n"
-"PO-Revision-Date: 2016-12-13 12:41+0100\n"
+"POT-Creation-Date: 2016-12-13 19:52+0100\n"
+"PO-Revision-Date: 2016-12-13 19:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: resoclick@free.fr\n"
 "Language: en\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __\n"
+"X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: admin\n"
 "X-Poedit-SearchPath-1: public\n"
 "X-Poedit-SearchPath-2: includes\n"
@@ -48,21 +48,54 @@ msgid "Position du label"
 msgstr "Label position"
 
 #: admin/class-like-this-site-admin.php:202
+#: admin/class-like-this-site-admin.php:393
+msgid "Classe css (facultatif)"
+msgstr "Css class"
+
+#: admin/class-like-this-site-admin.php:211
+msgid "Libellé du résultat"
+msgstr "Title of the result"
+
+#: admin/class-like-this-site-admin.php:220
 msgid "Emplacement du plugin"
 msgstr "Plugin position"
 
-#: admin/class-like-this-site-admin.php:224
+#: admin/class-like-this-site-admin.php:245
 msgid "Choisir les options."
 msgstr "Select your settings"
 
-#: admin/class-like-this-site-admin.php:233
+#: admin/class-like-this-site-admin.php:254
 msgid "Visualisation du résultat."
 msgstr "What will be displayed"
 
-#: admin/class-like-this-site-admin.php:234
+#: admin/class-like-this-site-admin.php:255
 msgid "Réinitialiser"
 msgstr "Reset"
 
-#: admin/class-like-this-site-admin.php:339
+#: admin/class-like-this-site-admin.php:360
 msgid "Votez pour ce site!"
 msgstr "Approve this site !!"
+
+#: admin/class-like-this-site-admin.php:375
+msgid "Au dessus de l'icône"
+msgstr "Above the icon"
+
+#: admin/class-like-this-site-admin.php:380
+msgid "Au dessous de l'icône"
+msgstr "Below the icon"
+
+#: admin/class-like-this-site-admin.php:402
+msgid "Nombre de votes"
+msgstr "Ratings"
+
+#: admin/class-like-this-site-admin.php:417
+msgid "Dans le pied de page"
+msgstr "In the footer"
+
+#: admin/class-like-this-site-admin.php:422
+msgid "Dans les barres latérales"
+msgstr "In sidebars"
+
+#: admin/class-like-this-site-admin.php:427
+msgid "Sur la page d'accueil"
+msgstr "On homepage"
