@@ -29,8 +29,8 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
    
-$('td input:radio').prop('checked', false);   
-$('#like_this_site_label').val("");
+//$('td input:radio').prop('checked', false);   
+//$('#like_this_site_label').val("");
 
 $('td #like_this_site_icone input:radio').click(function () {
   $('#like_this_site_resultat').html('<i class="fa fa-2x fa-'+(this.value)+'"></i>');
@@ -43,14 +43,18 @@ $('td #like_this_site_color input:radio').click(function () {
 
 $('.like_this_site_colorOk').click(function (e) {
   e.preventDefault();
+  $('td #like_this_site_color input:radio').prop('checked', false);   
   var inputColor = $('#valueInput').val();
   var couleur = "#"+(inputColor);
   $('#like_this_site_resultat i').css("color", couleur);
+  $('.perso-color').prop('checked', true);
+  $('.perso-color').val(inputColor);  
 });
 
 $('#like_this_site_label_ok_btn').click(function(e) {
    e.preventDefault();
    var label = $('#like_this_site_label').val();
+   $( "#initial_label" ).remove();
    var $divAutoTop = $( "<div id='divAutoTop'>"+label+"</div>" );
  
   $( "#like_this_site_resultat" ).prepend( $divAutoTop );
