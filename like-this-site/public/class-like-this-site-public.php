@@ -96,8 +96,24 @@ class Like_This_Site_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/like-this-site-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/like-this-site-public.js', array( 'jquery' ), $this->version, true );
+    wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
 	}
-
+  
+  public function displayLikeThisSite()
+  {
+     add_action( 'wp_ajax_site_like', 'site_like' );
+     add_action( 'wp_ajax_nopriv_site_like', 'site_like' );
+     include_once 'partials/like-this-site-public-display.php';
+  }
+  
+  function site_like() {
+    $options = get_option( 'like-this-site_options' ); 
+  	$param = $_POST['param'];
+    
+    update_option( $options['like_this_site_plugin_votes'], $param );
+      echo $param;
+  
+  	die();
+  }
 }

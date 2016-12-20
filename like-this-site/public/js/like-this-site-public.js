@@ -28,17 +28,19 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-   $( "#vote a" ).on( "click", function(e){
+   $( "#vote" ).on( "click", function(e){
       e.preventDefault(); 
       
-        var likes = $('#total').text();
-          if ($('#total').is(':empty')){
+        
+        var likes = $('#votes').text();
+          if ($('#votes').is(':empty')){
             var total = 1;
           } 
           else {
            var total = (parseFloat(likes) + 1);
           }          
-       
+        
+        /*
       	$.ajax({
       		url: sitelike.ajaxurl,
       		type: 'post',
@@ -47,14 +49,14 @@
             param : total
       		},
       		success: function( result ) {
-      			//alert( result );
+      			alert(result);
             $('.vote').remove('a');
-            $('.vote').html('<i class="fa fa-thumbs-up fa-5x"></i>');
-            $('#thankyouModal').modal('show');
+            //$('.vote').html('<i class="fa fa-thumbs-up fa-5x"></i>');
+            //$('#thankyouModal').modal('show');
       		}
-      	})
-        $( '#total' ).text( total );    
-
+      	}) */
+        $( '#votes' ).text( total );    
+        
     });
     
 })( jQuery );

@@ -76,6 +76,7 @@ class Like_This_Site_Admin {
       if (!$label_position = $this->settings['like_this_site_label_position']) : $label_position = 'top'; endif;
       if (!$label_result = $this->settings['like_this_site_label_result']) : $label_result = 'Nombre de votes'; endif;
       if (!$plugin_position = $this->settings['like_this_site_plugin_position']) : $plugin_position = 'sidebar'; endif;
+      if (!$plugin_votes = $this->settings['like_this_site_plugin_votes']) : $plugin_votes = 0 ; endif;
       
       if (empty($this->settings)) {   
         $default_values = array (
@@ -84,7 +85,8 @@ class Like_This_Site_Admin {
         'like_this_site_label' => $label,
         'like_this_site_label_position' => $label_position,
         'like_this_site_label_result'   => $label_result,
-        'like_this_site_plugin_position' => $plugin_position
+        'like_this_site_plugin_position' => $plugin_position,
+        'like_this_site_plugin_votes' => $plugin_votes
         );
         
         $this->settings = $default_values ;
@@ -270,7 +272,8 @@ class Like_This_Site_Admin {
     $display_label = '<div id="initial_label">' . $this->settings['like_this_site_label'] . '</div>';
     $display_icon =  '<div style="color:#' . $this->settings['like_this_site_color'] . '"><i class="fa fa-' . $this->settings['like_this_site_icon'] . ' fa-2x"></i></div>' ;
     $display_button = '<br><button id="reset">'.__('Réinitialiser', 'like-this-site') .'</button>';
-    $display_number = '<div class="display_result">'. $this->settings['like_this_site_label_result'] . '</div>'; 
+    $display_number = '<b>' . $this->settings['like_this_site_plugin_votes'] . '</b>' ;
+    $display_result = '<div class="display_result">'. $this->settings['like_this_site_label_result'] . '</div>'; 
     if ($this->settings['like_this_site_label_position'] == "top")
     {
         $output_display = $display_label.$display_icon ; 
@@ -280,7 +283,7 @@ class Like_This_Site_Admin {
         $output_display = $display_icon.$display_label ; 
     }
 		echo '<div id="like_this_site_zone_resultat">'.__( 'Visualisation du résultat.', 'like-this-site' ) . '<div id="like_this_site_resultat">'
-             . $output_display . $display_number .
+             . $output_display . $display_number . $display_result .
     '</div></div>';
     echo $display_button;
 	}
@@ -548,6 +551,9 @@ class Like_This_Site_Admin {
         else {
           $output['like_this_site_label_result'] =  $this->settings['like_this_site_label_result'];
         }
+        
+     //Gestion des votes
+      if (!$this->settings['like_this_site_plugin_votes']) : $output['like_this_site_plugin_votes'] = 0; endif;
    
     return $output ;
         
